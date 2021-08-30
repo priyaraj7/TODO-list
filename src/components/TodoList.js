@@ -6,9 +6,10 @@ const ToDoList = ({ todos, handleToggle, handleDeletedTask }) => {
   return (
     <div>
       {/* map over the state object that was passed down as props to create individual todos */}
-      {todos.map((todo) => {
+      {todos.map((todo, i) => {
         return (
           <Todo
+            key={i}
             todo={todo}
             handleToggle={handleToggle}
             handleDeletedTask={handleDeletedTask}

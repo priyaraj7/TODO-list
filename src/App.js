@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import TodoList from "./components/TodoList";
+import ToDoForm from "./components/TodoFom";
 
 function App() {
   let mockState = [
@@ -15,7 +16,7 @@ function App() {
   //Toggle task completion
   const handleToggle = (id) => {
     let mapped = todos.map((task) => {
-      return task.id === id
+      return task.id === Number(id)
         ? {
             ...task,
             complete: !task.complete,
@@ -32,11 +33,25 @@ function App() {
     setTodos(filtered);
   };
 
+  const addTask = (userInput) => {
+    let copy = [...todos];
+    copy = [
+      ...copy,
+      { id: todos.length + 1, task: userInput, complete: false },
+    ];
+    setTodos(copy);
+  };
+
   return (
     <div className="App">
       <h1>TO DO LIST</h1>
       {/* passing our entire state down to our <ToDoList /> component. */}
-      <TodoList todos={todos} />
+      <TodoList
+        todos={todos}
+        handleToggle={handleToggle}
+        handleDeletedTask={handleDeletedTask}
+      />
+      <ToDoForm addTask={addTask} />
     </div>
   );
 }
