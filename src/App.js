@@ -26,6 +26,11 @@ function App() {
   };
 
   //Delete completed tasks
+  //button is in todolist component
+  const handleDeletedTask = () => {
+    let filtered = todos.filter((x) => !x.complete);
+    setTodos(filtered);
+  };
 
   return (
     <div className="App">
